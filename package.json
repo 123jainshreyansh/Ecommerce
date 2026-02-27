@@ -1,0 +1,11 @@
+{
+  "name": "ecommerce-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:front": "cd front && npm install && npm run build",
+    "build:admin": "cd admin && npm install && npm run build",
+    "build:back": "cd back && npm install",
+    "build": "npm run build:front && npm run build:admin && npm run build:back"
+  }
+}

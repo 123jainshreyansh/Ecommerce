@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "front/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    },
+    {
+      "src": "admin/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.js"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "admin/$1",
+      "continue": true
+    },
+    {
+      "src": "/admin",
+      "dest": "admin/index.html",
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "admin/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "front/$1",
+      "continue": true
+    },
+    {
+      "src": "/(.*)",
+      "dest": "front/index.html"
+    }
+  ]
+}
